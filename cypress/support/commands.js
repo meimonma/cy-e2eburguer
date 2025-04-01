@@ -29,3 +29,16 @@ Cypress.Commands.add('verificarMsgErro', (msgEsperada) => {
         .and("contain.text", msgEsperada)
         .and('have.css', 'color', 'rgb(230, 57, 70)');
 })
+
+Cypress.Commands.add('verificarPagina', (rota, titulooPagina) => {
+    cy.url().should('include', `${rota}`)
+    cy.contains('h1', titulooPagina)
+})
+
+Cypress.Commands.add('verificarUsuarioLogado', (name) => {
+    const nomeUsuario = name.split(" ")[0]
+
+    cy.get('[data-testid="user-greeting"]')
+        .should("be.visible")
+        .and("have.text", `Olá, ${nomeUsuario}!`)
+})
